@@ -165,7 +165,6 @@ checksum256 oraclize_query__(account_name user, std::string datasource, std::str
 
 
 // CONSTANTS
-
 const uint8_t proofType_NONE = 0x00;
 const uint8_t proofType_TLSNotary = 0x10;
 const uint8_t proofType_Ledger = 0x30;
