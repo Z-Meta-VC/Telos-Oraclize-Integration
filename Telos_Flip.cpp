@@ -6,13 +6,16 @@
 using namespace eosio;
 
 
-class example2 : public eosio::contract {
+class flipper : public eosio::contract {
   public:
       using contract::contract;
+      int choice;
 
       /// @abi action
-      void getrandomnum() {
-         oraclize_query(10, "WolframAlpha", "random number between 1 and 6");
+      void getflip(int _choice) {
+         //TODO: accept payment
+         choice = _choice;
+         oraclize_query(10, "WolframAlpha", "random number between 0 and 1");
          print("Oraclize query was sent, standing by for the answer..");
       }
 
@@ -23,9 +26,16 @@ class example2 : public eosio::contract {
          std::string result_str = vector_to_string(result);
          print("Result:", result_str);
 
-         if (result_str != "6") getrandomnum();
+         if (result_str == choice){
+            //you win
+            
+            //TODO send money back plus a prize - a small fee
+         }else{
+            //you lose
+            //We keep your money
+         }
       }
 
 };
 
-EOSIO_ABI(example2, (getrandomnum)(callback))
+EOSIO_ABI(flipper , (getflip)(callback))
